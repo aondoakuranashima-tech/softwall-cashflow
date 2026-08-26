@@ -1,37 +1,35 @@
 {
-  "version": 1,
+  "version": 2,
   "currency": "USD",
-  "trial": {
-    "days": 14,
-    "plan": "basic"
-  },
+  "trial": { "days": 14, "plan": "basic", "trialPrice": 0 },
   "plans": [
-    { "id": "basic", "name": "Basic", "monthly": 59, "annualDiscountPercent": 2, "features": "limited" },
-    { "id": "super", "name": "Super", "monthly": 139, "annualDiscountPercent": 2 },
-    { "id": "pro", "name": "Pro", "monthly": 229, "annualDiscountPercent": 2 },
-    { "id": "premium", "name": "Premium", "monthly": 319, "annualDiscountPercent": 1.5 },
-    { "id": "enterprise", "name": "Enterprise", "monthly": 409, "annualDiscountPercent": 1.5 },
-    { "id": "enterprise_plus", "name": "Enterprise Plus", "monthly": 499, "annualDiscountPercent": 1.5 }
+    { "id": "basic", "name": "Basic", "introMonthly": 59, "monthly": 89, "annualDiscountPercent": 2, "features": "limited" },
+    { "id": "super", "name": "Super", "introMonthly": 139, "monthly": 169, "annualDiscountPercent": 2 },
+    { "id": "pro", "name": "Pro", "introMonthly": 229, "monthly": 259, "annualDiscountPercent": 2 },
+    { "id": "premium", "name": "Premium", "introMonthly": 319, "monthly": 319, "annualDiscountPercent": 1.5 },
+    { "id": "enterprise", "name": "Enterprise", "introMonthly": 349, "monthly": 409, "annualDiscountPercent": 1.5 },
+    { "id": "enterprise_plus", "name": "Enterprise Plus", "introMonthly": 499, "monthly": null, "annualDiscountPercent": null, "pricing": "custom_after_intro" }
   ],
   "addOns": [
-    {
-      "id": "additional_user",
-      "name": "Additional User",
-      "monthly": 39,
-      "annualDiscountPercent": 2.5,
-      "unit": "user",
-      "billingModel": "quantity"
-    }
+    { "id": "additional_user", "name": "Additional User", "monthly": 39, "annualDiscountPercent": 2.5, "unit": "user", "billingModel": "quantity" }
   ],
+  "annualPricing": {
+    "calculationBase": "standard_monthly",
+    "formula": "standard_monthly * 12 * (1 - annualDiscountPercent / 100)",
+    "introMonthlyPriceDoesNotApplyToAnnual": true,
+    "enterprisePlus": "custom"
+  },
   "rules": {
     "basePlanRequired": true,
     "additionalUsersAreAddOn": true,
-    "includedUserCounts": "TBD",
+    "includedUserCounts": { "basic": 3, "super": 5, "pro": 10, "premium": 15, "enterprise": 25, "enterprise_plus": 50 },
+    "readOnlyCollaborators": "unlimited_free",
     "additionalUserAccessRequiresEntitlement": true,
     "monthlyAddOnChanges": "prorate",
     "annualAddOnChanges": "prorate_remaining_term",
-    "annualAddOnDiscount": false,
+    "annualAddOnDiscount": 2.5,
     "paymentProvider": "payment-router",
-    "stripeEnabled": false
+    "stripeEnabled": false,
+    "introOffer": "first_billing_period_only"
   }
 }
