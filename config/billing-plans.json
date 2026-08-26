@@ -1,28 +1,30 @@
 {
-  "version": 3,
+  "version": 4,
   "currency": "USD",
   "trial": { "days": 14, "plan": "basic", "trialPrice": 0 },
   "promotion": {
     "model": "first_billing_period_promo",
     "display": "strike_standard_price",
+    "introPriceAppliesTo": "first_month_only",
     "renewalDisclosureRequired": true,
-    "introPriceAppliesTo": "first_month_only"
+    "pricingPageMustShowRenewalPrice": true,
+    "checkoutMustShowNextBillingAmount": true
   },
   "plans": [
-    { "id": "basic", "name": "Basic", "introMonthly": 59, "monthly": 89, "annualDiscountPercent": 2, "features": "limited" },
-    { "id": "super", "name": "Super", "introMonthly": 139, "monthly": 169, "annualDiscountPercent": 2 },
-    { "id": "pro", "name": "Pro", "introMonthly": 229, "monthly": 259, "annualDiscountPercent": 2 },
-    { "id": "premium", "name": "Premium", "introMonthly": 319, "monthly": 319, "annualDiscountPercent": 1.5 },
-    { "id": "enterprise", "name": "Enterprise", "introMonthly": 349, "monthly": 409, "annualDiscountPercent": 1.5 },
-    { "id": "enterprise_plus", "name": "Enterprise Plus", "introMonthly": 499, "monthly": null, "annualDiscountPercent": null, "pricing": "custom_after_intro" }
+    { "id": "basic", "name": "Basic", "promoMonthly": 59, "standardMonthly": 89, "annualDiscountPercent": 2, "features": "limited" },
+    { "id": "super", "name": "Super", "promoMonthly": 139, "standardMonthly": 169, "annualDiscountPercent": 2 },
+    { "id": "pro", "name": "Pro", "promoMonthly": 229, "standardMonthly": 259, "annualDiscountPercent": 2 },
+    { "id": "premium", "name": "Premium", "promoMonthly": 319, "standardMonthly": 319, "annualDiscountPercent": 1.5 },
+    { "id": "enterprise", "name": "Enterprise", "promoMonthly": 349, "standardMonthly": 409, "annualDiscountPercent": 1.5 },
+    { "id": "enterprise_plus", "name": "Enterprise Plus", "promoMonthly": 499, "standardMonthly": null, "annualDiscountPercent": null, "pricing": "custom_after_promo" }
   ],
   "addOns": [
     { "id": "additional_user", "name": "Additional User", "monthly": 39, "annualDiscountPercent": 2.5, "unit": "user", "billingModel": "quantity" }
   ],
   "annualPricing": {
-    "calculationBase": "standard_monthly",
-    "formula": "standard_monthly * 12 * (1 - annualDiscountPercent / 100)",
-    "introMonthlyPriceDoesNotApplyToAnnual": true,
+    "calculationBase": "standardMonthly",
+    "formula": "standardMonthly * 12 * (1 - annualDiscountPercent / 100)",
+    "introPromoDoesNotApplyToAnnual": true,
     "enterprisePlus": "custom"
   },
   "rules": {
@@ -37,7 +39,7 @@
     "paymentProvider": "payment-router",
     "stripeEnabled": false,
     "introOffer": "first_billing_period_only",
-    "pricingPageMustShowRenewalPrice": true,
-    "checkoutMustShowNextBillingAmount": true
+    "promotionCopy": "first_month_promo_then_standard_price",
+    "displayStandardPriceAsStruckThrough": true
   }
 }
