@@ -6,49 +6,12 @@
     "plan": "basic"
   },
   "plans": [
-    {
-      "id": "basic",
-      "name": "Basic",
-      "monthly": 59,
-      "annualDiscountPercent": 2,
-      "includedUsers": 3,
-      "features": "limited"
-    },
-    {
-      "id": "super",
-      "name": "Super",
-      "monthly": 139,
-      "annualDiscountPercent": 2,
-      "includedUsers": 5
-    },
-    {
-      "id": "pro",
-      "name": "Pro",
-      "monthly": 229,
-      "annualDiscountPercent": 2,
-      "includedUsers": 10
-    },
-    {
-      "id": "premium",
-      "name": "Premium",
-      "monthly": 319,
-      "annualDiscountPercent": 1.5,
-      "includedUsers": 20
-    },
-    {
-      "id": "enterprise",
-      "name": "Enterprise",
-      "monthly": 409,
-      "annualDiscountPercent": 1.5,
-      "includedUsers": 50
-    },
-    {
-      "id": "enterprise_plus",
-      "name": "Enterprise Plus",
-      "monthly": 499,
-      "annualDiscountPercent": 1.5,
-      "includedUsers": 100
-    }
+    { "id": "basic", "name": "Basic", "monthly": 59, "annualDiscountPercent": 2, "features": "limited" },
+    { "id": "super", "name": "Super", "monthly": 139, "annualDiscountPercent": 2 },
+    { "id": "pro", "name": "Pro", "monthly": 229, "annualDiscountPercent": 2 },
+    { "id": "premium", "name": "Premium", "monthly": 319, "annualDiscountPercent": 1.5 },
+    { "id": "enterprise", "name": "Enterprise", "monthly": 409, "annualDiscountPercent": 1.5 },
+    { "id": "enterprise_plus", "name": "Enterprise Plus", "monthly": 499, "annualDiscountPercent": 1.5 }
   ],
   "addOns": [
     {
@@ -62,10 +25,11 @@
   ],
   "rules": {
     "basePlanRequired": true,
-    "additionalUsersOnlyAfterIncludedUsers": true,
+    "additionalUsersAreAddOn": true,
+    "includedUserCounts": "TBD",
     "additionalUserAccessRequiresEntitlement": true,
-    "monthlySeatChanges": "prorate",
-    "annualSeatChanges": "prorate_remaining_term",
+    "monthlyAddOnChanges": "prorate",
+    "annualAddOnChanges": "prorate_remaining_term",
     "annualAddOnDiscount": false,
     "paymentProvider": "payment-router",
     "stripeEnabled": false
