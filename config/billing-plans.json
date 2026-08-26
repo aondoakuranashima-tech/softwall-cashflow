@@ -1,7 +1,13 @@
 {
-  "version": 2,
+  "version": 3,
   "currency": "USD",
   "trial": { "days": 14, "plan": "basic", "trialPrice": 0 },
+  "promotion": {
+    "model": "first_billing_period_promo",
+    "display": "strike_standard_price",
+    "renewalDisclosureRequired": true,
+    "introPriceAppliesTo": "first_month_only"
+  },
   "plans": [
     { "id": "basic", "name": "Basic", "introMonthly": 59, "monthly": 89, "annualDiscountPercent": 2, "features": "limited" },
     { "id": "super", "name": "Super", "introMonthly": 139, "monthly": 169, "annualDiscountPercent": 2 },
@@ -30,6 +36,8 @@
     "annualAddOnDiscount": 2.5,
     "paymentProvider": "payment-router",
     "stripeEnabled": false,
-    "introOffer": "first_billing_period_only"
+    "introOffer": "first_billing_period_only",
+    "pricingPageMustShowRenewalPrice": true,
+    "checkoutMustShowNextBillingAmount": true
   }
 }
