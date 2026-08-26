@@ -1,0 +1,83 @@
+{
+  "currency": "USD",
+  "trial": {
+    "days": 14,
+    "plan": "basic"
+  },
+  "billing": {
+    "intervals": ["monthly", "yearly"],
+    "annual_discount_model": "percentage"
+  },
+  "plans": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "monthly_price": 59,
+      "annual_discount_percent": 2,
+      "status": "active"
+    },
+    {
+      "id": "super",
+      "name": "Super",
+      "monthly_price": 139,
+      "annual_discount_percent": 2,
+      "status": "active"
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "monthly_price": 229,
+      "annual_discount_percent": 2,
+      "status": "active"
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "monthly_price": 319,
+      "annual_discount_percent": 1.5,
+      "status": "active"
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "monthly_price": 409,
+      "annual_discount_percent": 1.5,
+      "status": "active"
+    },
+    {
+      "id": "enterprise_plus",
+      "name": "Enterprise Plus",
+      "monthly_price": 499,
+      "annual_discount_percent": 1.5,
+      "status": "active"
+    }
+  ],
+  "add_ons": [
+    {
+      "id": "additional_user",
+      "name": "Additional User",
+      "monthly_price": 39,
+      "annual_discount_percent": 2.5,
+      "billing_model": "recurring_per_seat",
+      "status": "active"
+    }
+  ],
+  "rules": {
+    "standalone_per_user_plan": false,
+    "additional_users_are_add_ons": true,
+    "base_plan_required_for_additional_users": true,
+    "seat_count_is_metered": true,
+    "proration_on_seat_change": true,
+    "downgrade_effective_at_period_end": true,
+    "upgrade_effective_immediately": true,
+    "billing_source_of_truth": "verified_provider_webhooks"
+  },
+  "payment_providers": [
+    "paystack",
+    "flutterwave",
+    "dodo",
+    "paddle",
+    "paypal"
+  ],
+  "excluded_payment_providers": ["stripe"]
+}
