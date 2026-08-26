@@ -1,0 +1,64 @@
+{
+  "currency": "USD",
+  "trial": {
+    "plan": "basic",
+    "days": 14,
+    "featureAccess": "limited"
+  },
+  "plans": {
+    "basic": {
+      "monthlyMinor": 5900,
+      "annualDiscountPercent": 2
+    },
+    "super": {
+      "monthlyMinor": 13900,
+      "annualDiscountPercent": 2
+    },
+    "pro": {
+      "monthlyMinor": 22900,
+      "annualDiscountPercent": 2
+    },
+    "premium": {
+      "monthlyMinor": 31900,
+      "annualDiscountPercent": 1.5
+    },
+    "enterprise": {
+      "monthlyMinor": 40900,
+      "annualDiscountPercent": 1.5
+    },
+    "enterprise_plus": {
+      "monthlyMinor": 49900,
+      "annualDiscountPercent": 1.5
+    }
+  },
+  "addons": {
+    "additional_user": {
+      "type": "recurring_quantity",
+      "monthlyMinorPerUnit": 3900,
+      "annualDiscountPercent": 2.5,
+      "minimumQuantity": 0,
+      "maximumQuantity": null,
+      "name": "Additional User",
+      "description": "Additional user seat for an organization"
+    }
+  },
+  "deprecated": {
+    "per_user_plan": true
+  },
+  "providerPolicy": {
+    "stripe": "excluded",
+    "allowed": [
+      "paystack",
+      "flutterwave",
+      "dodo",
+      "paddle",
+      "paypal"
+    ]
+  },
+  "pricingPolicy": {
+    "storeMoneyAsMinorUnits": true,
+    "doNotUseFloatingPointForBilling": true,
+    "priceVersionsAreImmutable": true,
+    "includedSeats": "TBD_PENDING_PRICING_VALIDATION"
+  }
+}
