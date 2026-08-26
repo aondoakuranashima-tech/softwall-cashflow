@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "currency": "USD",
+  "trial": {
+    "days": 14,
+    "plan": "basic"
+  },
+  "plans": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "monthly": 59,
+      "annualDiscountPercent": 2,
+      "includedUsers": 3,
+      "features": "limited"
+    },
+    {
+      "id": "super",
+      "name": "Super",
+      "monthly": 139,
+      "annualDiscountPercent": 2,
+      "includedUsers": 5
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "monthly": 229,
+      "annualDiscountPercent": 2,
+      "includedUsers": 10
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "monthly": 319,
+      "annualDiscountPercent": 1.5,
+      "includedUsers": 20
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "monthly": 409,
+      "annualDiscountPercent": 1.5,
+      "includedUsers": 50
+    },
+    {
+      "id": "enterprise_plus",
+      "name": "Enterprise Plus",
+      "monthly": 499,
+      "annualDiscountPercent": 1.5,
+      "includedUsers": 100
+    }
+  ],
+  "addOns": [
+    {
+      "id": "additional_user",
+      "name": "Additional User",
+      "monthly": 39,
+      "annualDiscountPercent": 2.5,
+      "unit": "user",
+      "billingModel": "quantity"
+    }
+  ],
+  "rules": {
+    "basePlanRequired": true,
+    "additionalUsersOnlyAfterIncludedUsers": true,
+    "additionalUserAccessRequiresEntitlement": true,
+    "monthlySeatChanges": "prorate",
+    "annualSeatChanges": "prorate_remaining_term",
+    "annualAddOnDiscount": false,
+    "paymentProvider": "payment-router",
+    "stripeEnabled": false
+  }
+}
