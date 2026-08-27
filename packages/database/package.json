@@ -1,0 +1,25 @@
+{
+  "name": "@softwall/database",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "prisma generate --schema=prisma/schema.prisma",
+    "validate": "prisma validate --schema=prisma/schema.prisma",
+    "format": "prisma format --schema=prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "pg": "8.16.3"
+  },
+  "devDependencies": {
+    "@types/pg": "8.15.5",
+    "dotenv": "17.2.1",
+    "prisma": "7.10.0",
+    "typescript": "^5.9.2"
+  }
+}
