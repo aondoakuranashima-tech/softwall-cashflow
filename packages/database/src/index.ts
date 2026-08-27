@@ -11,4 +11,3 @@ const adapter = new PrismaPg({ connectionString });
 
 export const prisma = new PrismaClient({ adapter });
 export { PrismaClient } from "../generated/prisma/client";
-export * from "../generated/prisma/models";
