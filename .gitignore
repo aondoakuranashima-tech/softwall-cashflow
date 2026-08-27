@@ -39,3 +39,5 @@ secrets/
 # Prisma generated/local artifacts
 prisma/dev.db
 prisma/dev.db-journal
+packages/database/generated/
+packages/database/prisma/migrations/_shadow_database/
