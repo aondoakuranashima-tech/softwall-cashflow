@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["app", "audit", "integration"]
+}
+
+model Organization {
+  id               String             @id @default(uuid()) @db.Uuid
+  name             String
+  countryCode      String?            @map("country_code") @db.Char(2)
+  defaultCurrency  String?            @map("default_currency") @db.Char(3)
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @default(now()) @updatedAt @map("updated_at")
+  members          OrganizationMember[]
+  transactions     Transaction[]
+  connections      Connection[]
+  bankAccounts     BankAccount[]
+  auditEvents      AuditEvent[]
+
+  @@map("organizations")
+  @@schema("app")
+}
+
+model User {
+  id                String              @id @default(uuid()) @db.Uuid
+  email             String              @unique
+  displayName       String?             @map("display_name")
+  emailVerifiedAt   DateTime?           @map("email_verified_at")
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime            @default(now()) @updatedAt @map("updated_at")
+  memberships       OrganizationMember[]
+  auditEvents       AuditEvent[]
+
+  @@map("users")
+  @@schema("app")
+}
+
+model OrganizationMember {
+  organizationId String       @map("organization_id") @db.Uuid
+  userId         String       @map("user_id") @db.Uuid
+  role           String
+  createdAt      DateTime     @default(now()) @map("created_at")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([organizationId, userId])
+  @@index([userId])
+  @@map("organization_members")
+  @@schema("app")
+}
+
+model SchemaMetadata {
+  key       String   @id
+  value     String
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  @@map("schema_metadata")
+  @@schema("app")
+}
+
+model Transaction {
+  id                       String       @id @default(uuid()) @db.Uuid
+  organizationId           String       @map("organization_id") @db.Uuid
+  bankAccountId            String       @map("bank_account_id") @db.Uuid
+  externalTransactionRef   String?      @map("external_transaction_ref")
+  occurredAt               DateTime     @map("occurred_at")
+  amount                   Decimal
+  currency                 String       @db.Char(3)
+  direction                String
+  description              String?
+  merchantName             String?      @map("merchant_name")
+  category                 String?
+  categoryConfidence       Decimal?     @map("category_confidence")
+  isPending                Boolean      @default(false) @map("is_pending")
+  createdAt                DateTime     @default(now()) @map("created_at")
+  updatedAt                DateTime     @default(now()) @updatedAt @map("updated_at")
+  organization             Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  bankAccount              BankAccount  @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
+
+  @@unique([bankAccountId, externalTransactionRef])
+  @@index([organizationId, occurredAt(sort: Desc)])
+  @@index([bankAccountId, occurredAt(sort: Desc)])
+  @@index([organizationId, direction, occurredAt(sort: Desc)])
+  @@map("transactions")
+  @@schema("app")
+}
+
+model Connection {
+  id                  String        @id @default(uuid()) @db.Uuid
+  organizationId      String        @map("organization_id") @db.Uuid
+  provider            String
+  connectionType      String        @map("connection_type")
+  status              String        @default("PENDING")
+  externalAccountRef  String?       @map("external_account_ref")
+  lastSyncedAt        DateTime?     @map("last_synced_at")
+  createdAt           DateTime      @default(now()) @map("created_at")
+  updatedAt           DateTime      @default(now()) @updatedAt @map("updated_at")
+  organization        Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  bankAccounts        BankAccount[]
+
+  @@index([organizationId, status])
+  @@index([organizationId, provider])
+  @@map("connections")
+  @@schema("integration")
+}
+
+model BankAccount {
+  id                  String       @id @default(uuid()) @db.Uuid
+  organizationId      String       @map("organization_id") @db.Uuid
+  connectionId        String       @map("connection_id") @db.Uuid
+  externalAccountRef  String       @map("external_account_ref")
+  name                String
+  currency            String?      @db.Char(3)
+  currentBalance      Decimal?     @map("current_balance")
+  availableBalance    Decimal?     @map("available_balance")
+  lastSyncedAt        DateTime?    @map("last_synced_at")
+  createdAt           DateTime     @default(now()) @map("created_at")
+  updatedAt           DateTime     @default(now()) @updatedAt @map("updated_at")
+  organization        Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  connection          Connection   @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+  transactions        Transaction[]
+
+  @@unique([connectionId, externalAccountRef])
+  @@index([organizationId, currency])
+  @@map("bank_accounts")
+  @@schema("integration")
+}
+
+model AuditEvent {
+  id             String       @id @default(uuid()) @db.Uuid
+  organizationId String?      @map("organization_id") @db.Uuid
+  actorUserId    String?      @map("actor_user_id") @db.Uuid
+  eventType      String       @map("event_type")
+  resourceType   String?      @map("resource_type")
+  resourceId     String?      @map("resource_id") @db.Uuid
+  metadata       Json         @default("{}")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  actorUser      User?        @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt(sort: Desc)])
+  @@index([actorUserId, createdAt(sort: Desc)])
+  @@index([resourceType, resourceId, createdAt(sort: Desc)])
+  @@map("events")
+  @@schema("audit")
+}
