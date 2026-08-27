@@ -8,6 +8,9 @@
     "dev": "pnpm -r --parallel dev",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "db:generate": "pnpm --filter @softwall/database generate",
+    "db:validate": "pnpm --filter @softwall/database validate",
+    "db:format": "pnpm --filter @softwall/database format"
   }
 }
