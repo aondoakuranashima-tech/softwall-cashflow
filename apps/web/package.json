@@ -1,0 +1,9 @@
+{
+  "name": "@softwall/web",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node server.js"
+  }
+}
