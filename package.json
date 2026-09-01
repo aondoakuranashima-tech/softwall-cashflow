@@ -11,6 +11,8 @@
     "typecheck": "pnpm -r typecheck",
     "db:generate": "pnpm --filter @softwall/database generate",
     "db:validate": "pnpm --filter @softwall/database validate",
-    "db:format": "pnpm --filter @softwall/database format"
+    "db:format": "pnpm --filter @softwall/database format",
+    "web:build": "pnpm --filter @softwall/web build",
+    "web:start": "pnpm --filter @softwall/web start"
   }
 }
