@@ -1,6 +1,12 @@
 {
-  "version": 5,
+  "version": 6,
   "currency": "USD",
+  "displayCurrency": {
+    "default": "USD",
+    "selectable": true,
+    "registry": "config/currencies.json",
+    "conversion": "fx-rate-service"
+  },
   "trial": { "days": 14, "plan": "basic", "trialPrice": 0 },
   "promotion": {
     "model": "first_billing_period_promo",
