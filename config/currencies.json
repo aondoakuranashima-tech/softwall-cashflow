@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "defaultCurrency": "USD",
+  "selection": {
+    "enabled": true,
+    "userCanChange": true,
+    "persistPreference": true,
+    "pricingDisplayUsesSelectedCurrency": true
+  },
+  "conversion": {
+    "enabled": true,
+    "rateSource": "fx-rate-service",
+    "useLiveRatesForDisplay": true,
+    "historicalRatesForFinancialReporting": true,
+    "neverOverwriteHistoricalRates": true,
+    "roundingMode": "currency-aware"
+  },
+  "supportedCurrencies": [
+    { "code": "USD", "name": "US Dollar", "symbol": "$", "minorUnit": 2 },
+    { "code": "NGN", "name": "Nigerian Naira", "symbol": "₦", "minorUnit": 2 },
+    { "code": "GBP", "name": "British Pound", "symbol": "£", "minorUnit": 2 },
+    { "code": "EUR", "name": "Euro", "symbol": "€", "minorUnit": 2 },
+    { "code": "CAD", "name": "Canadian Dollar", "symbol": "CA$", "minorUnit": 2 },
+    { "code": "AUD", "name": "Australian Dollar", "symbol": "A$", "minorUnit": 2 },
+    { "code": "AED", "name": "UAE Dirham", "symbol": "د.إ", "minorUnit": 2 },
+    { "code": "SAR", "name": "Saudi Riyal", "symbol": "﷼", "minorUnit": 2 },
+    { "code": "KWD", "name": "Kuwaiti Dinar", "symbol": "د.ك", "minorUnit": 3 },
+    { "code": "BHD", "name": "Bahraini Dinar", "symbol": ".د.ب", "minorUnit": 3 },
+    { "code": "OMR", "name": "Omani Rial", "symbol": "﷼", "minorUnit": 3 },
+    { "code": "CHF", "name": "Swiss Franc", "symbol": "CHF", "minorUnit": 2 },
+    { "code": "JPY", "name": "Japanese Yen", "symbol": "¥", "minorUnit": 0 }
+  ],
+  "rules": {
+    "billingCanonicalCurrency": "USD",
+    "selectedCurrencyIsDisplayCurrency": true,
+    "financialRecordsKeepOriginalCurrency": true,
+    "conversionRateMustIncludeSourceAndTimestamp": true
+  }
+}
