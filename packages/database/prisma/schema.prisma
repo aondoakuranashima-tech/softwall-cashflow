@@ -19,6 +19,8 @@ model Organization {
   transactions     Transaction[]
   connections      Connection[]
   bankAccounts     BankAccount[]
+  receivables      Receivable[]
+  payables         Payable[]
   auditEvents      AuditEvent[]
 
   @@map("organizations")
@@ -86,6 +88,44 @@ model Transaction {
   @@index([bankAccountId, occurredAt(sort: Desc)])
   @@index([organizationId, direction, occurredAt(sort: Desc)])
   @@map("transactions")
+  @@schema("app")
+}
+
+model Receivable {
+  id             String       @id @default(uuid()) @db.Uuid
+  organizationId String       @map("organization_id") @db.Uuid
+  customerName   String       @map("customer_name")
+  dueDate        DateTime     @map("due_date")
+  amount         Decimal
+  currency       String       @db.Char(3)
+  status         String       @default("OPEN")
+  sourceRef      String?      @map("source_ref")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @default(now()) @updatedAt @map("updated_at")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, dueDate])
+  @@index([organizationId, status])
+  @@map("receivables")
+  @@schema("app")
+}
+
+model Payable {
+  id             String       @id @default(uuid()) @db.Uuid
+  organizationId String       @map("organization_id") @db.Uuid
+  vendorName     String       @map("vendor_name")
+  dueDate        DateTime     @map("due_date")
+  amount         Decimal
+  currency       String       @db.Char(3)
+  status         String       @default("OPEN")
+  sourceRef      String?      @map("source_ref")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @default(now()) @updatedAt @map("updated_at")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, dueDate])
+  @@index([organizationId, status])
+  @@map("payables")
   @@schema("app")
 }
 
