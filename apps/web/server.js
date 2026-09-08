@@ -6,13 +6,14 @@ const port = process.env.PORT || 3000;
 const dist = path.join(__dirname, 'dist');
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   if (req.url === '/health') {
     res.writeHead(200, { 'content-type': 'application/json' });
     return res.end(JSON.stringify({ status: 'ok', app: 'softwall-cashflow' }));
   }
   if (req.url.startsWith('/api/')) {
-    if (apiRoute(req, res)) return;
+    const handled = await apiRoute(req, res);
+    if (handled) return;
     res.writeHead(404, { 'content-type': 'application/json' });
     return res.end(JSON.stringify({ error: 'Not found' }));
   }
